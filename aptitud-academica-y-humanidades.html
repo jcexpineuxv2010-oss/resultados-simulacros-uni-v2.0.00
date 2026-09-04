@@ -100,8 +100,8 @@
             const contadorRegistros = document.getElementById("contadorRegistros");
             
             try {
-                // Leemos directamente el archivo datos.json unificado de GitHub
-                let respuesta = await fetch('datos.json');
+                // Leemos directamente el archivo humanidades.json unificado de GitHub
+                let respuesta = await fetch('humanidades.json');
                 if (!respuesta.ok) throw new Error("No se pudo cargar el archivo de datos.");
                 
                 let datosGlobales = await respuesta.json();
@@ -153,6 +153,9 @@
                 }
             }
         }
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>

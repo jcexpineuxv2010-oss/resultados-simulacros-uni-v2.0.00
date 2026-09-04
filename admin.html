@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Tutor - Grupo Ciencias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Franja Superior Institucional -->
+    <header class="top-header">
+        <div class="top-logo-area">
+            <div class="fake-emblem">GC</div>
+            <div class="top-logo-text">
+                <strong>GRUPO CIENCIAS</strong>
+                <span>PLATAFORMA DE RESULTADOS</span>
+            </div>
+        </div>
+        <div class="top-right-nav">
+            <a href="index.html">← VOLVER AL INICIO</a>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <span class="sub-title">GESTIÓN INTERNA</span>
+            <h1 class="main-title">PANEL DEL TUTOR</h1>
+        </div>
+    </section>
+
+<!-- Contenedor Principal del Panel -->
+<main class="main-container">
+
+    <!-- SECCIÓN DE CONTRASEÑA ÚNICA -->
+    <div id="authSection" class="admin-card" style="max-width: 500px; margin: 0 auto;">
+        <div class="admin-intro">
+            <h2>Acceso Restringido</h2>
+            <p>Ingresa la contraseña del tutor para gestionar las actualizaciones.</p>
+        </div>
+        <div class="admin-section">
+            <label for="passwordInput" class="admin-label">Contraseña de Acceso:</label>
+            <div class="auth-group">
+                <input type="password" id="passwordInput" placeholder="Ingrese contraseña">
+                <button class="btn-uni" onclick="verificarPassword()">Ingresar</button>
+            </div>
+            <p id="errorMsg" class="error-text oculto">Contraseña incorrecta.</p>
+        </div>
+    </div>
+
+<!-- CONTENEDOR DE PANELES DE CARGA -->
+    <div id="panelsContainer" class="panels-container">
+
+        <!-- PANEL 1: APTITUD ACADÉMICA Y HUMANIDADES -->
+        <div class="admin-card">
+            <div class="admin-intro">
+                <h2>Aptitud académica y humanidades</h2>
+                <p>Sube el archivo Excel con los resultados de aptitud académica y humanidades.</p>
+            </div>
+            <div class="admin-section">
+                <div class="instructions-box">
+                    <strong>Instrucciones:</strong> Selecciona tu archivo Excel (.xlsx o .csv).
+                </div>
+                <div class="upload-group">
+                    <input type="file" id="excelFileHum" accept=".xlsx, .xls, .csv" class="file-input">
+                    <button class="btn-uni" onclick="procesarCategoria('excelFileHum', 'statusMessageHum', 'humanidades')">Procesar Categoría</button>
+                </div>
+                <div id="statusMessageHum" class="status-box oculto"></div>
+                
+                <!-- Botón de descarga individual -->
+                <div style="margin-top: 15px; text-align: right;">
+                    <button class="btn-uni" style="background-color: #28a745; font-size: 13px; padding: 8px 15px;" onclick="descargarJSONIndividual('humanidades', 'humanidades.json')">📥 Descargar humanidades.json</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 2: MATEMÁTICA -->
+        <div class="admin-card">
+            <div class="admin-intro">
+                <h2>Matemática</h2>
+                <p>Sube el archivo Excel con los resultados del examen de matemática.</p>
+            </div>
+            <div class="admin-section">
+                <div class="instructions-box">
+                    <strong>Instrucciones:</strong> Selecciona tu archivo Excel (.xlsx o .csv).
+                </div>
+                <div class="upload-group">
+                    <input type="file" id="excelFileMat" accept=".xlsx, .xls, .csv" class="file-input">
+                    <button class="btn-uni" onclick="procesarCategoria('excelFileMat', 'statusMessageMat', 'matematica')">Procesar Categoría</button>
+                </div>
+                <div id="statusMessageMat" class="status-box oculto"></div>
+
+                <!-- Botón de descarga individual -->
+                <div style="margin-top: 15px; text-align: right;">
+                    <button class="btn-uni" style="background-color: #28a745; font-size: 13px; padding: 8px 15px;" onclick="descargarJSONIndividual('matematica', 'matematica.json')">📥 Descargar matematica.json</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PANEL 3: CIENCIAS -->
+        <div class="admin-card">
+            <div class="admin-intro">
+                <h2>Ciencias</h2>
+                <p>Sube el archivo Excel con los resultados del examen de ciencias.</p>
+            </div>
+            <div class="admin-section">
+                <div class="instructions-box">
+                    <strong>Instrucciones:</strong> Selecciona tu archivo Excel (.xlsx o .csv).
+                </div>
+                <div class="upload-group">
+                    <input type="file" id="excelFileCie" accept=".xlsx, .xls, .csv" class="file-input">
+                    <button class="btn-uni" onclick="procesarCategoria('excelFileCie', 'statusMessageCie', 'ciencias')">Procesar Categoría</button>
+                </div>
+                <div id="statusMessageCie" class="status-box oculto"></div>
+
+                <!-- Botón de descarga individual -->
+                <div style="margin-top: 15px; text-align: right;">
+                    <button class="btn-uni" style="background-color: #28a745; font-size: 13px; padding: 8px 15px;" onclick="descargarJSONIndividual('ciencias', 'ciencias.json')">📥 Descargar ciencias.json</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 4: RESULTADOS GENERALES -->
+        <div class="admin-card">
+            <div class="admin-intro">
+                <h2>Resultados generales</h2>
+                <p>Sube el archivo Excel con los resultados generales (con cálculo de especialidad).</p>
+            </div>
+            <div class="admin-section">
+                <div class="instructions-box">
+                    <strong>Instrucciones:</strong> Selecciona tu archivo Excel (.xlsx o .csv).
+                </div>
+                <div class="upload-group">
+                    <input type="file" id="excelFileGen" accept=".xlsx, .xls, .csv" class="file-input">
+                    <button class="btn-uni" onclick="procesarCategoria('excelFileGen', 'statusMessageGen', 'admision', true)">Procesar Categoría</button>
+                </div>
+                <div id="statusMessageGen" class="status-box oculto"></div>
+
+                <!-- Botón de descarga individual -->
+                <div style="margin-top: 15px; text-align: right;">
+                    <button class="btn-uni" style="background-color: #28a745; font-size: 13px; padding: 8px 15px;" onclick="descargarJSONIndividual('admision', 'admision.json')">📥 Descargar admision.json</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+    <!-- Footer Institucional -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <h3>GRUPO CIENCIAS</h3>
+                <p>Plataforma de Resultados | By tutorito</p>
+            </div>
+            <div class="footer-right">
+                <p>Av. Universitaria 5749, Comas 15314</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 GC. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Lógica del Panel -->
+<script>
+    // Objeto global temporal que almacena los datos procesados en la sesión
+    let datosGlobalesCompletos = {
+        admision: [],
+        matematica: [],
+        ciencias: [],
+        humanidades: []
+    };
+
+    function verificarPassword() {
+        const pass = document.getElementById('passwordInput').value;
+        const errorMsg = document.getElementById('errorMsg');
+        const authSection = document.getElementById('authSection');
+        const panelsContainer = document.getElementById('panelsContainer');
+
+        if (pass === 'Narutoshippuden123') {
+            authSection.classList.add('oculto');
+            panelsContainer.classList.add('mostrar');
+        } else {
+            errorMsg.classList.remove('oculto');
+        }
+    }
+
+    // Función para procesar archivos y almacenarlos temporalmente en memoria
+    function procesarCategoria(idInputFile, idMsgStatus, claveCategoria, usarRangos = false) {
+        const fileInput = document.getElementById(idInputFile);
+        const statusMsg = document.getElementById(idMsgStatus);
+
+        if (fileInput.files.length === 0) {
+            statusMsg.textContent = "Por favor selecciona un archivo Excel o CSV primero.";
+            statusMsg.className = "status-box error";
+            statusMsg.classList.remove('oculto');
+            return;
+        }
+
+        const archivo = fileInput.files[0];
+        const lector = new FileReader();
+
+        lector.onload = function (e) {
+            try {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                
+                const primeraHojaName = workbook.SheetNames[0];
+                const hoja = workbook.Sheets[primeraHojaName];
+                const jsonDatos = XLSX.utils.sheet_to_json(hoja);
+
+                if (jsonDatos.length === 0) {
+                    throw new Error("El archivo está vacío o no tiene datos válidos.");
+                }
+
+                const rangosCarreras = usarRangos ? [
+                    { carrera: "ARQUITECTURA", min: 11.930, max: 14.315 },
+                    { carrera: "URBANISMO", min: 9.213, max: 11.333 },
+                    { carrera: "INGENIERÍA CIVIL", min: 12.580, max: 15.593 },
+                    { carrera: "INGENIERÍA MECÁNICA", min: 12.273, max: 15.593 },
+                    { carrera: "INGENIERÍA MECÁNICA ELÉCTRICA", min: 11.573, max: 14.540 },
+                    { carrera: "INGENIERÍA NAVAL", min: 9.520, max: 13.213 },
+                    { carrera: "INGENIERÍA MECATRÓNICA", min: 13.240, max: 17.093 },
+                    { carrera: "INGENIERÍA AEROESPACIAL", min: 12.960, max: 15.800 },
+                    { carrera: "FÍSICA", min: 9.067, max: 12.827 },
+                    { carrera: "MATEMÁTICA", min: 9.207, max: 12.347 },
+                    { carrera: "QUÍMICA", min: 8.900, max: 9.793 },
+                    { carrera: "INGENIERÍA FÍSICA", min: 9.373, max: 13.107 },
+                    { carrera: "CIENCIA DE LA COMPUTACIÓN", min: 11.040, max: 13.933 },
+                    { carrera: "INGENIERÍA ELÉCTRICA", min: 9.667, max: 15.947 },
+                    { carrera: "INGENIERÍA ELECTRÓNICA", min: 10.187, max: 16.593 },
+                    { carrera: "INGENIERÍA DE TELECOMUNICACIONES", min: 10.033, max: 15.293 },
+                    { carrera: "INGENIERÍA DE CIBERSEGURIDAD", min: 11.653, max: 14.280 },
+                    { carrera: "INGENIERÍA BIOMÉDICA", min: 9.313, max: 14.033 },
+                    { carrera: "INGENIERÍA INDUSTRIAL", min: 11.880, max: 17.793 },
+                    { carrera: "INGENIERÍA DE SISTEMAS", min: 13.433, max: 15.807 },
+                    { carrera: "INGENIERÍA DE SOFTWARE", min: 13.107, max: 16.340 },
+                    { carrera: "INGENIERÍA DE INTELIGENCIA ARTIFICIAL", min: 13.193, max: 15.833 },
+                    { carrera: "INGENIERÍA GEOLÓGICA", min: 9.093, max: 11.653 },
+                    { carrera: "INGENIERÍA METALÚRGICA", min: 9.253, max: 12.680 },
+                    { carrera: "INGENIERÍA DE MINAS", min: 11.213, max: 13.927 },
+                    { carrera: "INGENIERÍA SANITARIA", min: 8.980, max: 12.747 },
+                    { carrera: "INGENIERÍA DE HIGIENE", min: 8.967, max: 11.753 },
+                    { carrera: "INGENIERÍA AMBIENTAL", min: 9.433, max: 12.960 },
+                    { carrera: "INGENIERÍA ECONÓMICA", min: 10.360, max: 17.387 },
+                    { carrera: "INGENIERÍA ESTADÍSTICA", min: 9.540, max: 13.747 },
+                    { carrera: "INGENIERÍA QUÍMICA", min: 8.920, max: 14.213 },
+                    { carrera: "INGENIERÍA TEXTIL", min: 9.973, max: 12.613 },
+                    { carrera: "INGENIERÍA PETROQUÍMICA", min: 9.186, max: 11.747 },
+                    { carrera: "INGENIERÍA DE PETRÓLEO", min: 9.067, max: 12.980 }
+                ] : [];
+
+                const listaFormateada = jsonDatos.map((row, index) => {
+                    let clavePuntaje = Object.keys(row).find(k => k.toLowerCase().includes('punt') || k.toLowerCase().includes('not') || k.toLowerCase().includes('scor'));
+                    let valorPuntajeBruto = clavePuntaje ? row[clavePuntaje] : (row.puntaje || row.PUNTAJE || 0);
+                    
+                    let puntajeStr = String(valorPuntajeBruto).replace(',', '.');
+                    let puntajeNum = parseFloat(puntajeStr) || 0;
+
+                    let notaDecimal = (puntajeNum * 20) / 600;
+
+                    let especialidadEncontrada = "";
+                    if (usarRangos) {
+                        for (let r of rangosCarreras) {
+                            if (puntajeNum >= r.min && puntajeNum <= r.max) {
+                                especialidadEncontrada = r.carrera;
+                                break; 
+                            }
+                        }
+                    }
+
+                    return {
+                        id: index + 1,
+                        dni: String(row.dni || row.DNI || row.Codigo || row.codigo || "").trim(),
+                        nombre: String(row.nombre || row.NOMBRE || "").trim(),
+                        puntaje: puntajeNum.toFixed(3).replace('.', ','), 
+                        nota: notaDecimal.toFixed(2).replace('.', ','), 
+                        especialidad: especialidadEncontrada 
+                    };
+                });
+
+                listaFormateada.sort((a, b) => {
+                    let puntajeA = parseFloat(a.puntaje.replace('.', '').replace(',', '.')) || 0;
+                    let puntajeB = parseFloat(b.puntaje.replace('.', '').replace(',', '.')) || 0;
+                    return puntajeB - puntajeA;
+                });
+
+                // Guardamos en el objeto temporal
+                datosGlobalesCompletos[claveCategoria] = listaFormateada;
+
+                statusMsg.textContent = `✔ Procesado con éxito (${listaFormateada.length} registros). ¡Ya puedes descargar su JSON!`;
+                statusMsg.className = "status-box success";
+                statusMsg.classList.remove('oculto');
+
+            } catch (error) {
+                statusMsg.textContent = "Error al procesar el archivo: " + error.message;
+                statusMsg.className = "status-box error";
+                statusMsg.classList.remove('oculto');
+            }
+        };
+
+        lector.readAsArrayBuffer(archivo);
+    }
+
+    // Función para descargar un JSON independiente por cada categoría
+    function descargarJSONIndividual(claveCategoria, nombreArchivo) {
+        let datosAExportar = {
+            [claveCategoria]: datosGlobalesCompletos[claveCategoria] || []
+        };
+
+        let contenidoJSON = JSON.stringify(datosAExportar, null, 2);
+        let blob = new Blob([contenidoJSON], { type: "application/json" });
+        let url = URL.createObjectURL(blob);
+        
+        let a = document.createElement("a");
+        a.href = url;
+        a.download = nombreArchivo;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+</script>
+
+<!-- Librería SheetJS (XLSX) -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</body>
+</html>

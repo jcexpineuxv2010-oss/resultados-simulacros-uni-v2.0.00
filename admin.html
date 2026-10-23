@@ -68,8 +68,6 @@
                     <button class="btn-uni" onclick="procesarCategoria('excelFileHum', 'statusMessageHum', 'humanidades')">Procesar Categoría</button>
                 </div>
                 <div id="statusMessageHum" class="status-box oculto"></div>
-                
-                <!-- Botón de descarga individual -->
                 <div style="margin-top: 15px; text-align: right;">
                     <button class="btn-uni" style="background-color: #28a745; font-size: 13px; padding: 8px 15px;" onclick="descargarJSONIndividual('humanidades', 'humanidades.json')">📥 Descargar humanidades.json</button>
                 </div>
@@ -91,8 +89,6 @@
                     <button class="btn-uni" onclick="procesarCategoria('excelFileMat', 'statusMessageMat', 'matematica')">Procesar Categoría</button>
                 </div>
                 <div id="statusMessageMat" class="status-box oculto"></div>
-
-                <!-- Botón de descarga individual -->
                 <div style="margin-top: 15px; text-align: right;">
                     <button class="btn-uni" style="background-color: #28a745; font-size: 13px; padding: 8px 15px;" onclick="descargarJSONIndividual('matematica', 'matematica.json')">📥 Descargar matematica.json</button>
                 </div>
@@ -114,8 +110,6 @@
                     <button class="btn-uni" onclick="procesarCategoria('excelFileCie', 'statusMessageCie', 'ciencias')">Procesar Categoría</button>
                 </div>
                 <div id="statusMessageCie" class="status-box oculto"></div>
-
-                <!-- Botón de descarga individual -->
                 <div style="margin-top: 15px; text-align: right;">
                     <button class="btn-uni" style="background-color: #28a745; font-size: 13px; padding: 8px 15px;" onclick="descargarJSONIndividual('ciencias', 'ciencias.json')">📥 Descargar ciencias.json</button>
                 </div>
@@ -137,8 +131,6 @@
                     <button class="btn-uni" onclick="procesarCategoria('excelFileGen', 'statusMessageGen', 'admision', true)">Procesar Categoría</button>
                 </div>
                 <div id="statusMessageGen" class="status-box oculto"></div>
-
-                <!-- Botón de descarga individual -->
                 <div style="margin-top: 15px; text-align: right;">
                     <button class="btn-uni" style="background-color: #28a745; font-size: 13px; padding: 8px 15px;" onclick="descargarJSONIndividual('admision', 'admision.json')">📥 Descargar admision.json</button>
                 </div>
@@ -166,7 +158,6 @@
 
     <!-- Lógica del Panel -->
 <script>
-    // Objeto global temporal que almacena los datos procesados en la sesión
     let datosGlobalesCompletos = {
         admision: [],
         matematica: [],
@@ -187,8 +178,6 @@
             errorMsg.classList.remove('oculto');
         }
     }
-
-    // Función para procesar archivos y almacenarlos temporalmente en memoria
     function procesarCategoria(idInputFile, idMsgStatus, claveCategoria, usarRangos = false) {
         const fileInput = document.getElementById(idInputFile);
         const statusMsg = document.getElementById(idMsgStatus);
@@ -288,7 +277,6 @@
                     return puntajeB - puntajeA;
                 });
 
-                // Guardamos en el objeto temporal
                 datosGlobalesCompletos[claveCategoria] = listaFormateada;
 
                 statusMsg.textContent = `✔ Procesado con éxito (${listaFormateada.length} registros). ¡Ya puedes descargar su JSON!`;
@@ -305,7 +293,6 @@
         lector.readAsArrayBuffer(archivo);
     }
 
-    // Función para descargar un JSON independiente por cada categoría
     function descargarJSONIndividual(claveCategoria, nombreArchivo) {
         let datosAExportar = {
             [claveCategoria]: datosGlobalesCompletos[claveCategoria] || []
@@ -324,7 +311,6 @@
     }
 </script>
 
-<!-- Librería SheetJS (XLSX) -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </body>
 </html>

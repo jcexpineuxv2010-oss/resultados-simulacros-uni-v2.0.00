@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <!-- Franja Superior (Sin Acceso Tutor) -->
+    <!-- Franja Superior -->
     <header class="top-header">
         <div class="top-logo-area">
             <div class="fake-emblem">GC</div>
@@ -65,7 +65,7 @@
                         </tr>
                     </thead>
                     <tbody id="cuerpoTabla">
-                        <!-- Los datos se cargan dinámicamente aquí -->
+                        
                     </tbody>
                 </table>
             </div>
@@ -100,21 +100,17 @@
             const contadorRegistros = document.getElementById("contadorRegistros");
             
             try {
-                // Leemos directamente el archivo humanidades.json unificado de GitHub
                 let respuesta = await fetch('humanidades.json');
                 if (!respuesta.ok) throw new Error("No se pudo cargar el archivo de datos.");
                 
                 let datosGlobales = await respuesta.json();
                 
-                // Extraemos específicamente la categoría de humanidades
                 let resultados = datosGlobales.humanidades || [];
 
-                // Actualiza el contador en pantalla
                 if (contadorRegistros) {
                     contadorRegistros.textContent = `${resultados.length} registros`;
                 }
 
-                // Pinta los datos dentro de la tabla
                 tbody.innerHTML = "";
                 resultados.forEach((item) => {
                     let fila = `

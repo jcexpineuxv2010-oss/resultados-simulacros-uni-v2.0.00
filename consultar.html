@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <!-- Franja Superior (Sin Acceso Tutor) -->
+    <!-- Franja Superior -->
     <header class="top-header">
         <div class="top-logo-area">
             <div class="fake-emblem">GC</div>
@@ -43,7 +43,7 @@
             <div class="records-count" id="contadorRegistros">0 registros</div>
         </div>
 
-        <!-- Contenedor del Buscador y la Tabla (Bloque con fondo gris claro) -->
+        <!-- Contenedor del Buscador y la Tabla -->
         <div class="public-list-wrapper">
             
             <!-- Barra de búsqueda superior -->
@@ -65,7 +65,7 @@
                         </tr>
                     </thead>
                     <tbody id="cuerpoTabla">
-                        <!-- Los datos se cargan dinámicamente aquí -->
+                       
                     </tbody>
                 </table>
             </div>
@@ -99,16 +99,13 @@
             const tbody = document.getElementById("cuerpoTabla");
             const contadorRegistros = document.getElementById("contadorRegistros");
             
-            // Recuperamos directamente los datos del localStorage (si no hay, se queda vacío)
             const datosGuardados = localStorage.getItem('gc_resultados_admision');
             let resultados = datosGuardados ? JSON.parse(datosGuardados) : [];
 
-            // Actualiza el contador en pantalla
             if (contadorRegistros) {
                 contadorRegistros.textContent = `${resultados.length} registros`;
             }
 
-            // Pinta los datos dentro de la tabla
             tbody.innerHTML = "";
             resultados.forEach((item) => {
                 let fila = `

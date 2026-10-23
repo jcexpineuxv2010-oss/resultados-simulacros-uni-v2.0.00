@@ -1,7 +1,5 @@
-// Variable global para almacenar los datos cargados desde el JSON
 let resultadosAlumnos = [];
 
-// Detectamos automáticamente qué archivo JSON cargar según la página web actual
 function obtenerArchivoJsonSegunPagina() {
     const ruta = window.location.pathname;
     
@@ -12,12 +10,10 @@ function obtenerArchivoJsonSegunPagina() {
     } else if (ruta.includes('ciencias')) {
         return 'ciencias.json';
     } else {
-        // Por defecto o para la página de resultados generales / admisión
         return 'admision.json';
     }
 }
 
-// Cargamos el JSON correspondiente de forma automática al abrir cualquier página
 fetch(obtenerArchivoJsonSegunPagina())
     .then(response => response.json())
     .then(data => {
@@ -40,8 +36,6 @@ document.getElementById('btnBuscar').addEventListener('click', function () {
         alert("Los datos aún se están cargando o el archivo JSON está vacío.");
         return;
     }
-
-    // Buscamos el DNI dentro de los datos cargados del JSON
     const alumnoEncontrado = resultadosAlumnos.find(alumno => alumno.dni === dniBuscado);
 
     if (alumnoEncontrado) {
